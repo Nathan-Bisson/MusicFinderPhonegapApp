@@ -1,0 +1,13 @@
+2014-12-04 16:04:35.162 Music![2312:47066] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/AndrewHillier/Library/Developer/CoreSimulator/Devices/D0B813F7-947D-4B8D-9962-585F2D286E12/data/Containers/Data/Application/E80BCA3E-7F1B-4AEC-BB97-1296470B60E6/Library/Cookies/Cookies.binarycookies
+2014-12-04 16:04:35.429 Music![2312:47066] Apache Cordova native platform version 3.6.3 is starting.
+2014-12-04 16:04:35.430 Music![2312:47066] Multi-tasking -> Device: YES, App: YES
+2014-12-04 16:04:35.578 Music![2312:47066] Unlimited access to network resources
+2014-12-04 16:04:35.580 Music![2312:47066] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+
+2014-12-04 16:04:37.161 Music![2312:47066] Resetting plugins due to page load.
+2014-12-04 16:04:37.409 Music![2312:47066] Finished load of: file:///Users/AndrewHillier/Library/Developer/CoreSimulator/Devices/D0B813F7-947D-4B8D-9962-585F2D286E12/data/Containers/Bundle/Application/EACDCA98-78A5-424F-9876-8AB110BD1D54/Music!.app/www/index.html

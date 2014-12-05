@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+     	<meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" href="css/ratchet.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Music!</title>
+    </head>
+    <body>
+    	<section id="discovery" class="show content">
+            <div class="segmented-control">
+                <div id="artistTab" class="control-item active">
+                    <h2 class="topTab">Artist</h2>
+                </div>
+                <div id="genreTab" class="control-item">
+                    <h2 class="topTab">Genre</h2>
+                </div> 
+           	</div>
+                           
+            <div id="mainBody">
+                <div id="artist" class="show">
+                    <form>
+                        <input type="search" placeholder="Search Artist" id="searchArtist"/>
+                        <button class="btn btn-primary btn-block" type="button" id="discArtist">Search</button>
+                    </form>
+                    <div id="artistSearchResults">
+                        <div id="artistsHeader">
+                            <h3>Artists</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="artistResultList" class="table-view">
+                                <!---<li class="artistResult table-view-cell">T-Pain</li>--->
+                            </ul>
+                        </div>
+                        <div id="topSongsHeader">
+                            <h3>Top Songs</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="topSongsList" class="table-view">
+                                <!---<li class="topSong table-view-cell">Buy U A Drink</li>
+                                <li class="topSong table-view-cell">Something else</li>
+                                <li class="topSong table-view-cell">Something else</li>--->
+                            </ul>
+                        </div>
+                        <div id="topAlbumsHeader">
+                            <h3>Top Albums</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="topAlbumsList" class="table-view">
+                                <!---<li class="topAlbum table-view-cell">Rappa Ternt Sanga</li>
+                                <li class="topAlbum table-view-cell">Something else</li>
+                                <li class="topAlbum table-view-cell">Something else</li>--->
+                            </ul>
+                        </div>
+                        <div id="eventsHeader">
+                            <h3>Events</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="artistResultEventList" class="table-view">
+                                <!---<li class="resultEvent table-view-cell">Ottawa - Bronson Center - December 20th, 2014</li>
+                                <li class="resultEvent table-view-cell">Something else</li>
+                                <li class="resultEvent table-view-cell">Something else</li>--->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="genre" class="hide">
+                    <form>
+                        <input type="search" placeholder="Search Genre" id="searchGenre"/>
+                        <button class="btn btn-primary btn-block" type="button" id="discGenre">Search</button>
+                    </form>
+                    <div id="genreSearchResults">
+                        <div id="genreTopArtistsHeader">
+                            <h3>Top Artists(All Time)</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="genreResultList" class="table-view">
+                                <!---<li class="genreArtistsResult table-view-cell">T-Pain</li>--->
+                            </ul>
+                        </div>
+                        <div id="genreTopSongsHeader">
+                            <h3>Top Songs(All Time)</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="genreTopSongsList" class="table-view">
+                                <!---<li class="topSong table-view-cell">Buy U A Drink</li>
+                                <li class="topSong table-view-cell">Something else</li>
+                                <li class="topSong table-view-cell">Something else</li>--->
+                            </ul>
+                        </div>
+                        <div id="genreTopAlbumsHeader">
+                            <h3>Top Albums(All Time)</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="genreTopAlbumsList" class="table-view">
+                                <!---<li class="topAlbum table-view-cell">Rappa Ternt Sanga</li>
+                                <li class="topAlbum table-view-cell">Something else</li>
+                                <li class="topAlbum table-view-cell">Something else</li>--->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       	</section>
+            
+        <section id="related" class="hide content">
+            <div class="segmented-control">
+                <div id="relatedArtistTab" class="control-item active">
+                    <h2 class="topTab">Artist</h2>
+                </div>
+                <div id="relatedSongTab" class="control-item">
+                    <h2 class="topTab">Song</h2>
+                </div>
+            </div>
+            
+            <div id="relatedMainBody">
+                <div id="relatedArtists" class="show">
+                    <form>
+                        <input type="search" placeholder="Search Artist"/>
+                        <button class="btn btn-primary btn-block">Search</button>
+                    </form>
+                    <div id="relatedArtistSearchResults">
+                        <div id="relatedArtistsHeader">
+                            <h3>Artists</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="relatedArtistResultList" class="table-view">
+                                <li class="artistResult table-view-cell">T-Pain</li>
+                            </ul>
+                        </div>
+                        <div id="relatedTopSongsHeader">
+                            <h3>Top Songs</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="relatedTopSongsList" class="table-view">
+                                <li class="topSong table-view-cell">Buy U A Drink</li>
+                                <li class="topSong table-view-cell">Something else</li>
+                                <li class="topSong table-view-cell">Something else</li>
+                            </ul>
+                        </div>
+                        <div id="relatedTopAlbumsHeader">
+                            <h3>Top Albums</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="relatedTopAlbumsList" class="table-view">
+                                <li class="topAlbum table-view-cell">Rappa Ternt Sanga</li>
+                                <li class="topAlbum table-view-cell">Something else</li>
+                                <li class="topAlbum table-view-cell">Something else</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="relatedSongs" class="hide">
+                    <form>
+                        <input type="search" placeholder="Search Song"/>
+                        <button class="btn btn-primary btn-block">Search</button>
+                    </form>
+                    <div id="relatedSongsSearchResults">
+                        <div id="relatedSearchedSongHeader">
+                            <h3>Song</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="searchedSongResultList" class="table-view">
+                                <li class="artistResult table-view-cell">T-Pain</li>
+                            </ul>
+                        </div>
+                        <div id="relatedSearchedTopSongsHeader">
+                            <h3>Related Songs</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="relatedSearchedTopSongsList" class="table-view">
+                                <li class="topSong table-view-cell">Buy U A Drink</li>
+                                <li class="topSong table-view-cell">Something else</li>
+                                <li class="topSong table-view-cell">Something else</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+        <section id="events" class="hide content">
+            <div class="segmented-control">
+                <div id="nearYouTab" class="control-item active">
+                    <h2 class="topTab">Near You</h2>
+                </div>
+                <div id="worldwideTab" class="control-item">
+                    <h2 class="topTab">Worldwide</h2>
+                </div>
+            </div>
+            
+            <div id="eventsMainBody">
+                <div id="nearYou" class="show">
+                    <form>
+                        <input type="search" placeholder="Search Artist"/>
+                        <button class="btn btn-primary btn-block">Search</button>
+                    </form>
+                    <div id="eventsNearYouResults">
+                        <div id="eventsNearYouHeader">
+                            <h3>Events</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="eventsNearYouResultList" class="table-view">
+                                <li class="artistResult table-view-cell">Something here</li>
+                                <li class="artistResult table-view-cell">Something here</li>
+                            </ul>
+                        </div>
+                  	</div>
+                </div>
+                
+                <div id="worldwide" class="hide">
+                    <form>
+                        <input type="search" placeholder="Search Artist"/>
+                        <button class="btn btn-primary btn-block">Search</button>
+                    </form>
+                    <div id="EventsWorldwideResults">
+                        <div id="eventsWorldwideHeader">
+                            <h3>Events</h3>
+                        </div>
+                        <div class="card">
+                            <ul id="eventsWorldwideResultList" class="table-view">
+                                <li class="artistResult table-view-cell">Something here</li>
+                                <li class="artistResult table-view-cell">Something here</li>
+                            </ul>
+                        </div>
+                  	</div>
+                </div>
+            </div>
+        </section>
+    
+        <div id="bottomTabs">
+            <nav class="bar bar-tab">
+                <div id="discoveryTab" class="tab-item active">
+                    Discovery
+                </div>
+                <div id="relatedTab" class="tab-item">
+                    Related
+                </div>
+                <div id="eventsTab" class="tab-item">
+                    Events
+                </div>
+            </nav>
+      	</div>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery 2.1.0.js"></script>
+        <script type="text/javascript" src="js/ratchet.min.js"></script>
+        <script type="text/javascript" src="js/push.js"></script>
+        <script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="js/lastfm.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="application/javascript" src="js/fastclick.js"></script>
+        <script>
+			window.addEventListener('load', function() {
+				FastClick.attach(document.body); 
+			}, false);
+		</script>
+    </body>
+</html>

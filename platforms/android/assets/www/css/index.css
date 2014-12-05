@@ -1,0 +1,107 @@
+/*--CSS--*/
+.show{
+	display:block;
+}
+.hide{
+	display:none;
+}
+#mainBody{
+	padding-top:15px;
+}
+#relatedMainBody{
+	padding-top:15px;
+}
+#eventsMainBody{
+	padding-top:15px;
+}
+.btn-block{
+	margin:0 auto;
+}
+h3{
+	font-size:20px;
+}
+h2{
+	font-size:25px;
+}
+#artistsHeader{
+	text-align:center;
+	padding-top:25px;
+}
+#topSongsHeader{
+	text-align:center;
+}
+#topAlbumsHeader{
+	text-align:center;
+}
+#eventsHeader{
+	text-align:center;
+}
+#artistSearchResults{
+	padding-bottom:50px;
+}
+#genreTopArtistsHeader{
+	text-align:center;
+	padding-top:25px;
+}
+#genreTopSongsHeader{
+	text-align:center;
+}
+#genreTopAlbumsHeader{
+	text-align:center;
+}
+#genreEventsHeader{
+	text-align:center;
+}
+#genreSearchResults{
+	padding-bottom:50px;
+}
+#relatedArtistsHeader{
+	text-align:center;
+	padding-top:25px;
+}
+#relatedTopSongsHeader{
+	text-align:center;
+}
+#relatedTopAlbumsHeader{
+	text-align:center;
+}
+#relatedArtistSearchResults{
+	padding-bottom:50px;
+}
+#relatedSearchedSongHeader{
+	text-align:center;
+	padding-top:25px;
+}
+#relatedSearchedTopSongsHeader{
+	text-align:center;
+}
+#relatedSongsSearchResults{
+	padding-bottom:50px;
+}
+#eventsNearYouHeader{
+	text-align:center;
+	padding-top:25px;
+}
+#eventsNearYouResults{
+	padding-bottom:50px;
+}
+
+#eventsWorldwideHeader{
+	text-align:center;
+	padding-top:25px;
+}
+#EventsWorldwideResults{
+	padding-bottom:50px;
+}
+.segmented-control{
+	height:50px;
+}
+.control-item{
+	padding-top:20px;
+}
+.topTab{
+	padding-top:10px;
+}
+
+
+
