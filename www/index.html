@@ -211,17 +211,19 @@
                 
                 <div id="worldwide" class="hide">
                     <form>
-                        <input type="search" placeholder="Search City"/>
-                        <button class="btn btn-primary btn-block">Search</button>
+                        <input type="search" placeholder="Search City" id="searchedCity"/>
+                        <input type="search" placeholder="Search by Genre(Optional)" id="searchedgenre"/>
+                        <button class="btn btn-primary btn-block" type="button" id="buttonWorld">Search</button>
                     </form>
                     <div id="EventsWorldwideResults">
                         <div id="eventsWorldwideHeader">
                             <h3>Events</h3>
                         </div>
+                        <div id="worldMap" class="card" style="width:95%;height:200px;"></div>
                         <div class="card">
-                            <ul id="eventsWorldwideResultList" class="table-view">
-                                <li class="artistResult table-view-cell">Something here</li>
-                                <li class="artistResult table-view-cell">Something here</li>
+                        	<ul id="eventsWorldwideResultList" class="table-view">
+                                <!--<li class="artistResult table-view-cell">Something here</li>
+                                <li class="artistResult table-view-cell">Something here</li>-->
                             </ul>
                         </div>
                   	</div>

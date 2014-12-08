@@ -125,11 +125,15 @@ document.getElementById("nearYouButton").addEventListener("click", function() {
 	nearYouMap();
 });
 
+document.getElementById("buttonWorld").addEventListener("click", function() {
+	worldEvent();
+});
+
 $("#artistResultEventList").on('click', 'li', function() {
 	eventURL = this.id;
 	
 	var webBrowser = window.open(encodeURI(eventURL), '_blank');
-	webBrowser.addEventListener('exit', function(event) {
+	webBrowser.addEventListener('exit', function(event) { //glitch where page won't show once closed. This line fixes that
 		$( "#discoveryTab" ).addClass( "active" );
 		$( "#relatedTab" ).removeClass( "active" );
 		$( "#eventsTab" ).removeClass( "active" );	
@@ -248,6 +252,66 @@ function nearYouMap() {
 function gpsLocation() {
 	alert("yes");
 	navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+}
+
+function worldEvent() {
+	var searchedCity = document.getElementById("searchedCity").value;
+	
+	document.getElementById("eventsWorldwideResultList").innerHTML = "";
+	
+	var geocoder = new google.maps.Geocoder();
+	
+	geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': searchedCity}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var myOptions = {
+                zoom: 12,
+                center: results[0].geometry.location,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("worldMap"), myOptions);
+			
+			var lastfm = new LastFM({
+  				apiKey    : 'db2a9b5638ab52fb92255a9e3e9a4c13',
+  				apiSecret : '718ae7b5fe78a60a6bb648977b221411',
+			});
+	
+			lastfm.geo.getEvents({location: searchedCity, limit: 5}, {success: function(data){
+				console.log(data);
+				for(var i = 0; i < data.events.event.length; i++) {
+					var venueObject = data.events.event[i].venue.location['geo:point'];
+					var venueLat = venueObject[Object.keys(venueObject)[0]];
+					var venueLong = venueObject[Object.keys(venueObject)[1]];
+					var venuelatLong = new google.maps.LatLng(venueLat, venueLong);
+					
+					var marker = new google.maps.Marker({
+                		map: map,
+                		position: venuelatLong 
+            });
+				}
+			}, error: function(code, message){
+				console.log("Oh No an Error!");
+			}});
+		}
+    });
+		
+	var lastfm = new LastFM({
+  		apiKey    : 'db2a9b5638ab52fb92255a9e3e9a4c13',
+  		apiSecret : '718ae7b5fe78a60a6bb648977b221411',
+	});
+	
+	lastfm.geo.getEvents({location: searchedCity, limit: 5}, {success: function(data){
+		for(var i = 0; i < data.events.event.length; i++) {
+			var imageObject = data.events.event[i].image[1]; //object containg image url and url size
+			var eventImage = imageObject[Object.keys(imageObject)[0]];
+			var infoURL = data.events.event[i].url;
+			console.log(infoURL);
+			
+			document.getElementById("eventsWorldwideResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].venue.name + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
+		}
+	}, error: function(code, message){
+		console.log("Oh No an Error!");
+	}});
 }
 
 
