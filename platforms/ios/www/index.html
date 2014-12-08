@@ -126,7 +126,7 @@
                     </form>
                     <div id="relatedArtistSearchResults">
                         <div id="relatedArtistsHeader">
-                            <h3>Artists</h3>
+                            <h3>Related Artists</h3>
                         </div>
                         <div class="card">
                             <ul id="relatedArtistResultList" class="table-view">
@@ -134,7 +134,7 @@
                             </ul>
                         </div>
                         <div id="relatedTopSongsHeader">
-                            <h3>Top Songs</h3>
+                            <h3>Related Songs</h3>
                         </div>
                         <div class="card">
                             <ul id="relatedTopSongsList" class="table-view">
@@ -144,7 +144,7 @@
                             </ul>
                         </div>
                         <div id="relatedTopAlbumsHeader">
-                            <h3>Top Albums</h3>
+                            <h3>Related Albums</h3>
                         </div>
                         <div class="card">
                             <ul id="relatedTopAlbumsList" class="table-view">
@@ -198,24 +198,20 @@
                 <div id="nearYou" class="show">
                     <form>
                         <input type="search" placeholder="Search Artist"/>
-                        <button class="btn btn-primary btn-block">Search</button>
+                        <button class="btn btn-primary btn-block" type="button" id="nearYouButton">Search</button>
                     </form>
                     <div id="eventsNearYouResults">
                         <div id="eventsNearYouHeader">
                             <h3>Events</h3>
                         </div>
-                        <div class="card">
-                            <ul id="eventsNearYouResultList" class="table-view">
-                                <li class="artistResult table-view-cell">Something here</li>
-                                <li class="artistResult table-view-cell">Something here</li>
-                            </ul>
+                        <div id="googleMap" class="card" style="width:95%;height:200px;"></div>
                         </div>
                   	</div>
                 </div>
                 
                 <div id="worldwide" class="hide">
                     <form>
-                        <input type="search" placeholder="Search Artist"/>
+                        <input type="search" placeholder="Search City"/>
                         <button class="btn btn-primary btn-block">Search</button>
                     </form>
                     <div id="EventsWorldwideResults">
@@ -251,6 +247,7 @@
         <script type="text/javascript" src="js/jquery 2.1.0.js"></script>
         <script type="text/javascript" src="js/ratchet.min.js"></script>
         <script type="text/javascript" src="js/push.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFJowjzBQfQPNlUB1sneWt2IsX1BSIv88" type="text/javascript"></script>
         <script type="text/javascript" src="js/md5.js"></script>
 		<script type="text/javascript" src="js/lastfm.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

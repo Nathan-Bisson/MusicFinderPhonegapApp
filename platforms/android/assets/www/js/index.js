@@ -104,6 +104,13 @@ $( "#eventsTab" ).click(function() {
 	$( "#related" ).addClass( "hide" );
 	$( "#events" ).removeClass( "hide" );
 	$( "#events" ).addClass( "show" );
+	
+	gpsLocation();
+});
+
+$( "#artistResultEventList" ).click(function() {
+	$( "#discovery" ).removeClass( "show" );
+	$( "#discovery" ).addClass( "hide" );
 });
 
 document.getElementById("discArtist").addEventListener("click", function() {
@@ -112,6 +119,28 @@ document.getElementById("discArtist").addEventListener("click", function() {
 
 document.getElementById("discGenre").addEventListener("click", function() {
 	discoverGenre();
+});
+
+document.getElementById("nearYouButton").addEventListener("click", function() {
+	nearYouMap();
+});
+
+$("#artistResultEventList").on('click', 'li', function() {
+	eventURL = this.id;
+	
+	var webBrowser = window.open(encodeURI(eventURL), '_blank');
+	webBrowser.addEventListener('exit', function(event) {
+		$( "#discoveryTab" ).addClass( "active" );
+		$( "#relatedTab" ).removeClass( "active" );
+		$( "#eventsTab" ).removeClass( "active" );	
+	
+		$( "#discovery" ).removeClass( "hide" );
+		$( "#discovery" ).addClass( "show" );
+		$( "#related" ).removeClass( "show" );
+		$( "#related" ).addClass( "hide" );
+		$( "#events" ).removeClass( "show" );
+		$( "#events" ).addClass( "hide" );
+	});
 });
 
 function discoverArtist() {
@@ -129,16 +158,13 @@ function discoverArtist() {
 	});
 
 	lastfm.artist.search({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
-  		console.log(data);
-		document.getElementById("artistResultList").innerHTML += '<li class="artistResult table-view-cell">' + data.results.artistmatches.artist[0].name + '</li>'
+  		document.getElementById("artistResultList").innerHTML += '<li class="artistResult table-view-cell">' + data.results.artistmatches.artist[0].name + '</li>'
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
 	}});
 	
 	lastfm.artist.getTopTracks({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
-  		console.log(data);
-		for(var i = 0; i < data.toptracks.track.length; i++) {
-			console.log(data.toptracks.track[i].name);
+  		for(var i = 0; i < data.toptracks.track.length; i++) {
 			document.getElementById("topSongsList").innerHTML += '<li class="artistResult table-view-cell">' + data.toptracks.track[i].name + '</li>'
 		}
 	}, error: function(code, message){
@@ -146,9 +172,7 @@ function discoverArtist() {
 	}});
 	
 	lastfm.artist.getTopAlbums({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
-  		console.log(data);
-		for(var i = 0; i < data.topalbums.album.length; i++) {
-			console.log(data.topalbums.album[i].name);
+  		for(var i = 0; i < data.topalbums.album.length; i++) {
 			document.getElementById("topAlbumsList").innerHTML += '<li class="artistResult table-view-cell">' + data.topalbums.album[i].name + '</li>'
 		}
 	}, error: function(code, message){
@@ -158,16 +182,15 @@ function discoverArtist() {
 	lastfm.artist.getEvents({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
   		console.log(data);
 		for(var i = 0; i < data.events.event.length; i++) {
-			console.log(data.events.event[i].venue.name);
-			console.log(data.events.event[i].website)
-			var imageObject = data.events.event[i].image[3]; //object containg image url and url size
-			console.log(imageObject[Object.keys(imageObject)[0]]); //gets the image url
+			var imageObject = data.events.event[i].image[1]; //object containg image url and url size
 			var eventImage = imageObject[Object.keys(imageObject)[0]];
+			var infoURL = data.events.event[i].url;
+			console.log(infoURL);
 			
-			document.getElementById("artistResultEventList").innerHTML += '<li class="table-view-cell media"> <a> <img class="media-object pull-left" src="http://placehold.it/42x42"> <div class="media-body">' + data.events.event[i].venue.name + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
+			document.getElementById("artistResultEventList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].venue.name + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
 		}
 	}, error: function(code, message){
-  	/* Show error message. */
+  		console.log("Oh No an Error!");
 	}});
 }
 
@@ -185,9 +208,7 @@ function discoverGenre() {
 	});
 	
 	lastfm.tag.getTopArtists({tag: searchedGenre, limit: 5}, {success: function(data){
-  		console.log(data);
-		for(var i = 0; i < data.topartists.artist.length; i++) {
-			console.log(data.topartists.artist[i].name);
+  		for(var i = 0; i < data.topartists.artist.length; i++) {
 			document.getElementById("genreResultList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + data.topartists.artist[i].name + '</li>'
 		}
 	}, error: function(code, message){
@@ -195,8 +216,7 @@ function discoverGenre() {
 	}});
 	
 	lastfm.tag.getTopTracks({tag: searchedGenre, limit: 5}, {success: function(data){
-  		console.log(data);
-		for(var i = 0; i < data.toptracks.track.length; i++) {
+  		for(var i = 0; i < data.toptracks.track.length; i++) {
 			var trackName = data.toptracks.track[i].name;
 			var artistName = data.toptracks.track[i].artist.name;
 			document.getElementById("genreTopSongsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + trackName + ' - ' + artistName + '</li>'
@@ -206,8 +226,7 @@ function discoverGenre() {
 	}});
 	
 	lastfm.tag.getTopAlbums({tag: searchedGenre, limit: 5}, {success: function(data){
-  		console.log(data);
-		for(var i = 0; i < data.topalbums.album.length; i++) {
+  		for(var i = 0; i < data.topalbums.album.length; i++) {
 			var albumName = data.topalbums.album[i].name;
 			var artistName = data.topalbums.album[i].artist.name;
 			document.getElementById("genreTopAlbumsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + albumName + ' - ' + artistName + '</li>'
@@ -216,3 +235,25 @@ function discoverGenre() {
   		console.log("Oh No an Error!");
 	}});
 }
+
+function nearYouMap() {
+	var mapProp = {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:5,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+
+function gpsLocation() {
+	alert("yes");
+	navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+}
+
+
+function successCallback(position) {      
+	alert("hello");
+}
+function errorCallback(error) { 
+	alert(error.code);
+}           
