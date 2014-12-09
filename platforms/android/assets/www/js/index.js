@@ -223,22 +223,37 @@ function discoverArtist() {
 	});
 
 	lastfm.artist.search({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
-  		document.getElementById("artistResultList").innerHTML += '<li class="artistResult table-view-cell">' + data.results.artistmatches.artist[0].name + '</li>'
+  		console.log(data);
+		var artistImageObject = data.results.artistmatches.artist[0].image[1]; 
+		var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
+			
+		document.getElementById("artistResultList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + data.results.artistmatches.artist[0].name + '</div></li>'
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
 	}});
 	
 	lastfm.artist.getTopTracks({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
-  		for(var i = 0; i < data.toptracks.track.length; i++) {
-			document.getElementById("topSongsList").innerHTML += '<li class="artistResult table-view-cell">' + data.toptracks.track[i].name + '</li>'
+  		console.log(data);
+		for(var i = 0; i < data.toptracks.track.length; i++) {
+			/*var songImageObject = data.toptracks.track[i].image[0] //data.results.artistmatches.artist[i].image[0]; 
+			var songImage = songImageObject[Object.keys(songImageObject)[0]];
+			
+			document.getElementById("topSongsList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + songImage + '">' + data.toptracks.track[i].name + '</div></li>'*/
+			document.getElementById("topSongsList").innerHTML += '<li class="topSong table-view-cell">' + data.toptracks.track[i].name + '</li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
 	}});
 	
 	lastfm.artist.getTopAlbums({artist: searchedArtist, limit: 5, autocorrect: "1"}, {success: function(data){
-  		for(var i = 0; i < data.topalbums.album.length; i++) {
-			document.getElementById("topAlbumsList").innerHTML += '<li class="artistResult table-view-cell">' + data.topalbums.album[i].name + '</li>'
+  		console.log(data);
+		for(var i = 0; i < data.topalbums.album.length; i++) {
+			var songImageObject = data.topalbums.album[i].image[0] //data.results.artistmatches.artist[i].image[0]; 
+			var songImage = songImageObject[Object.keys(songImageObject)[0]];
+			
+			document.getElementById("topAlbumsList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + songImage + '">' + data.topalbums.album[i].name + '</div></li>'
+			
+			//document.getElementById("topAlbumsList").innerHTML += '<li class="artistResult table-view-cell">' + data.topalbums.album[i].name + '</li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
@@ -250,7 +265,6 @@ function discoverArtist() {
 			var imageObject = data.events.event[i].image[1]; //object containg image url and url size
 			var eventImage = imageObject[Object.keys(imageObject)[0]];
 			var infoURL = data.events.event[i].url;
-			console.log(infoURL);
 			
 			document.getElementById("artistResultEventList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].venue.name + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
 		}
@@ -261,7 +275,6 @@ function discoverArtist() {
 
 function discoverGenre() {
 	var searchedGenre = document.getElementById("searchGenre").value;
-	alert(searchedGenre);
 	
 	document.getElementById("genreResultList").innerHTML = "";
 	document.getElementById("genreTopSongsList").innerHTML = "";
@@ -273,17 +286,25 @@ function discoverGenre() {
 	});
 	
 	lastfm.tag.getTopArtists({tag: searchedGenre, limit: 5}, {success: function(data){
-  		for(var i = 0; i < data.topartists.artist.length; i++) {
-			document.getElementById("genreResultList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + data.topartists.artist[i].name + '</li>'
+  		console.log(data);
+		for(var i = 0; i < data.topartists.artist.length; i++) {
+			var artistImageObject = data.topartists.artist[i].image[1] //data.results.artistmatches.artist[i].image[0]; 
+			var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
+			
+			document.getElementById("genreResultList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + data.topartists.artist[i].name + '</div></li>'
+			
+			//document.getElementById("genreResultList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + data.topartists.artist[i].name + '</li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
 	}});
 	
 	lastfm.tag.getTopTracks({tag: searchedGenre, limit: 5}, {success: function(data){
-  		for(var i = 0; i < data.toptracks.track.length; i++) {
+  		console.log(data);
+		for(var i = 0; i < data.toptracks.track.length; i++) {
 			var trackName = data.toptracks.track[i].name;
 			var artistName = data.toptracks.track[i].artist.name;
+			
 			document.getElementById("genreTopSongsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + trackName + ' - ' + artistName + '</li>'
 		}
 	}, error: function(code, message){
@@ -291,10 +312,16 @@ function discoverGenre() {
 	}});
 	
 	lastfm.tag.getTopAlbums({tag: searchedGenre, limit: 5}, {success: function(data){
-  		for(var i = 0; i < data.topalbums.album.length; i++) {
+  		console.log(data);
+		for(var i = 0; i < data.topalbums.album.length; i++) {
 			var albumName = data.topalbums.album[i].name;
 			var artistName = data.topalbums.album[i].artist.name;
-			document.getElementById("genreTopAlbumsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + albumName + ' - ' + artistName + '</li>'
+			var artistImageObject = data.topalbums.album[i].image[0] //data.results.artistmatches.artist[i].image[0]; 
+			var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
+			
+			document.getElementById("genreTopAlbumsList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + albumName + ' - ' + artistName + '</div></li>'
+			
+			//document.getElementById("genreTopAlbumsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + albumName + ' - ' + artistName + '</li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
@@ -344,6 +371,13 @@ function relatedSongs() {
 		
 		lastfm.track.getSimilar({track: trackName, artist: artistName, limit: 5, autocorrect: "1"}, {success: function(data){
   			console.log(data);
+			for(var i = 0; i < data.similartracks.track.length; i++) {
+				var relatedTrackName = data.similartracks.track[i].name;
+				var relatedArtistName = data.similartracks.track[i].artist.name;
+			
+				document.getElementById("relatedSearchedTopSongsList").innerHTML += '<li class="topSong table-view-cell">' + relatedTrackName + ' - ' + artistName + '</li>';
+			}
+		
 		}, error: function(code, message){
   			console.log("Oh No an Error!");
 		}});
