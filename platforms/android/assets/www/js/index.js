@@ -133,6 +133,26 @@ document.getElementById("discGenre").addEventListener("click", function() {
 	}
 });
 
+document.getElementById("relatedAritistSearch").addEventListener("click", function() {
+	var networkState = navigator.connection.type;
+	
+	if(networkState === Connection.NONE) {
+		alert("Oh no! You don't have a data connection!");
+	} else {
+		relatedArtists();
+	}
+});
+
+document.getElementById("relatedSongSearchButton").addEventListener("click", function() {
+	var networkState = navigator.connection.type;
+	
+	if(networkState === Connection.NONE) {
+		alert("Oh no! You don't have a data connection!");
+	} else {
+		relatedSongs();
+	}
+});
+
 document.getElementById("nearYouButton").addEventListener("click", function() {
 	var networkState = navigator.connection.type;
 	
@@ -281,6 +301,59 @@ function discoverGenre() {
 	}});
 }
 
+function relatedArtists() {
+	var artistSearch = document.getElementById("searchRelatedArtist").value;
+	
+	document.getElementById("relatedArtistResultList").innerHTML = "";
+	
+	var lastfm = new LastFM({
+  		apiKey    : 'db2a9b5638ab52fb92255a9e3e9a4c13',
+  		apiSecret : '718ae7b5fe78a60a6bb648977b221411',
+	});
+	
+	lastfm.artist.getSimilar({artist: artistSearch, limit: 5, autocorrect: "1"}, {success: function(data){
+  		console.log(data);
+		for(var i = 0; i < data.similarartists.artist.length; i++) {
+			var artistImageObject = data.similarartists.artist[i].image[0];
+			var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
+			
+			document.getElementById("relatedArtistResultList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + data.similarartists.artist[i].name + '</div></li>'
+		}
+	}, error: function(code, message){
+  		console.log("Oh No an Error!");
+	}});
+}
+
+function relatedSongs() {
+	var songSearch = document.getElementById("relatedSongSearch").value;
+	
+	document.getElementById("searchedSongResultList").innerHTML = "";
+	document.getElementById("relatedSearchedTopSongsList").innerHTML = "";
+	
+	var lastfm = new LastFM({
+  		apiKey    : 'db2a9b5638ab52fb92255a9e3e9a4c13',
+  		apiSecret : '718ae7b5fe78a60a6bb648977b221411',
+	});
+	
+	lastfm.track.search({track: songSearch, limit: 5}, {success: function(data){
+  		console.log(data);
+		var trackName = data.results.trackmatches.track[0].name;
+		var artistName = data.results.trackmatches.track[0].artist;
+		
+		document.getElementById("searchedSongResultList").innerHTML += '<li class="artistResult table-view-cell">' + trackName + ' - ' + artistName + '</li>';
+		
+		lastfm.track.getSimilar({track: trackName, artist: artistName, limit: 5, autocorrect: "1"}, {success: function(data){
+  			console.log(data);
+		}, error: function(code, message){
+  			console.log("Oh No an Error!");
+		}});
+	
+	}, error: function(code, message){
+  		console.log("Oh No an Error!");
+	}});
+	
+}
+
 function nearYouMap() {
 	var mapProp = {
     center:new google.maps.LatLng(51.508742,-0.120850),
@@ -327,7 +400,8 @@ function worldEvent() {
 					
 					var marker = new google.maps.Marker({
                 		map: map,
-                		position: venuelatLong 
+                		position: venuelatLong, 
+						animation: google.maps.Animation.DROP
             });
 				}
 			}, error: function(code, message){
