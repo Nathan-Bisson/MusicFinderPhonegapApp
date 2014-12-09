@@ -114,26 +114,50 @@ $( "#artistResultEventList" ).click(function() {
 });
 
 document.getElementById("discArtist").addEventListener("click", function() {
-	discoverArtist();
+	var networkState = navigator.connection.type;
+	
+	if(networkState === Connection.NONE) {
+		alert("Oh no! You don't have a data connection!");
+	} else {
+		discoverArtist();
+	}
 });
 
 document.getElementById("discGenre").addEventListener("click", function() {
-	discoverGenre();
+	var networkState = navigator.connection.type;
+	
+	if(networkState === Connection.NONE) {
+		alert("Oh no! You don't have a data connection!");
+	} else {
+		discoverGenre();
+	}
 });
 
 document.getElementById("nearYouButton").addEventListener("click", function() {
-	nearYouMap();
+	var networkState = navigator.connection.type;
+	
+	if(networkState === Connection.NONE) {
+		alert("Oh no! You don't have a data connection!");
+	} else {
+		nearYouMap();
+	}
 });
 
 document.getElementById("buttonWorld").addEventListener("click", function() {
-	worldEvent();
+	var networkState = navigator.connection.type;
+	
+	if(networkState === Connection.NONE) {
+		alert("Oh no! You don't have a data connection!");
+	} else {
+		worldEvent();
+	}
 });
 
-$("#artistResultEventList").on('click', 'li', function() {
+$("#artistResultEventList").on('click', 'li', function() { //in-app browser for discover page
 	eventURL = this.id;
 	
 	var webBrowser = window.open(encodeURI(eventURL), '_blank');
-	webBrowser.addEventListener('exit', function(event) { //glitch where page won't show once closed. This line fixes that
+	webBrowser.addEventListener('exit', function(event) { //bug where page won't show once closed. This line fixes that
 		$( "#discoveryTab" ).addClass( "active" );
 		$( "#relatedTab" ).removeClass( "active" );
 		$( "#eventsTab" ).removeClass( "active" );	
@@ -147,9 +171,26 @@ $("#artistResultEventList").on('click', 'li', function() {
 	});
 });
 
+$("#eventsWorldwideResultList").on('click', 'li', function() { //in-app browser for world event page
+	eventURL = this.id;
+	
+	var webBrowser = window.open(encodeURI(eventURL), '_blank');
+	/*webBrowser.addEventListener('exit', function(event) { //bug where page won't show once closed. This line fixes that
+	$( "#discoveryTab" ).removeClass( "active" );
+	$( "#relatedTab" ).removeClass( "active" );
+	$( "#eventsTab" ).addClass( "active" );
+	
+	$( "#discovery" ).removeClass( "show" );
+	$( "#discovery" ).addClass( "hide" );
+	$( "#related" ).removeClass( "show" );
+	$( "#related" ).addClass( "hide" );
+	$( "#events" ).removeClass( "hide" );
+	$( "#events" ).addClass( "show" );
+	});*/
+});
+
 function discoverArtist() {
 	var searchedArtist = document.getElementById("searchArtist").value;
-	alert(searchedArtist);
 	
 	document.getElementById("artistResultList").innerHTML = "";
 	document.getElementById("topSongsList").innerHTML = "";
@@ -307,7 +348,7 @@ function worldEvent() {
 			var infoURL = data.events.event[i].url;
 			console.log(infoURL);
 			
-			document.getElementById("eventsWorldwideResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].venue.name + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
+			document.getElementById("eventsWorldwideResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].artists['headliner'] + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
 		}
 	}, error: function(code, message){
 		console.log("Oh No an Error!");

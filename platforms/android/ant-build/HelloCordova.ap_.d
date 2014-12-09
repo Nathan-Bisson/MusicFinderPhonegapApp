@@ -78,6 +78,10 @@
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/js/push.js \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/js/ratchet.min.js \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser \
+/Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.network-information \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser/www \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js \
+/Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.network-information/www \
+/Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.network-information/www/Connection.js \
+/Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/assets/www/plugins/org.apache.cordova.network-information/www/network.js \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/ant-build/AndroidManifest.xml \
