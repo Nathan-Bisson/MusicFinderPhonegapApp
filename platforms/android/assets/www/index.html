@@ -196,18 +196,18 @@
             
             <div id="eventsMainBody">
                 <div id="nearYou" class="show">
-                    <form>
-                        <input type="search" placeholder="Search Artist"/>
-                        <button class="btn btn-primary btn-block" type="button" id="nearYouButton">Search</button>
-                    </form>
-                    <div id="eventsNearYouResults">
-                        <div id="eventsNearYouHeader">
-                            <h3>Events</h3>
+                	<div id="eventsNearYouHeader">
+                    	<h3>Events</h3>
+                    </div>
+                    <div id="googleMap" class="card" style="width:95%;height:200px;"></div>
+                    <div class="card">
+                        	<ul id="nearYouResultList" class="table-view">
+                                <!--<li class="artistResult table-view-cell">Something here</li>
+                                <li class="artistResult table-view-cell">Something here</li>-->
+                            </ul>
                         </div>
-                        <div id="googleMap" class="card" style="width:95%;height:200px;"></div>
-                        </div>
-                  	</div>
                 </div>
+            </div>
                 
                 <div id="worldwide" class="hide">
                     <form>

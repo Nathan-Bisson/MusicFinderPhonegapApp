@@ -153,16 +153,6 @@ document.getElementById("relatedSongSearchButton").addEventListener("click", fun
 	}
 });
 
-document.getElementById("nearYouButton").addEventListener("click", function() {
-	var networkState = navigator.connection.type;
-	
-	if(networkState === Connection.NONE) {
-		alert("Oh no! You don't have a data connection!");
-	} else {
-		nearYouMap();
-	}
-});
-
 document.getElementById("buttonWorld").addEventListener("click", function() {
 	var networkState = navigator.connection.type;
 	
@@ -341,7 +331,7 @@ function relatedArtists() {
 	lastfm.artist.getSimilar({artist: artistSearch, limit: 5, autocorrect: "1"}, {success: function(data){
   		console.log(data);
 		for(var i = 0; i < data.similarartists.artist.length; i++) {
-			var artistImageObject = data.similarartists.artist[i].image[0];
+			var artistImageObject = data.similarartists.artist[i].image[1];
 			var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
 			
 			document.getElementById("relatedArtistResultList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + data.similarartists.artist[i].name + '</div></li>'
@@ -388,18 +378,70 @@ function relatedSongs() {
 	
 }
 
-function nearYouMap() {
-	var mapProp = {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-
 function gpsLocation() {
-	alert("yes");
-	navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+	//navigator.geolocation.getCurrentPosition(successCallback, errorCallback, { maximumAge: 10000, timeout: 10000, enableHighAccuracy: true });
+		
+	var latitude = 45.4214;
+	var longitude = -75.6919;
+	
+	var mapProp = {
+    	center:new google.maps.LatLng(latitude,longitude),
+    	zoom:12,
+    	mapTypeId:google.maps.MapTypeId.ROADMAP
+  	};
+    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	
+	var latlng = new google.maps.LatLng(latitude, longitude);
+    var geocoder = new google.maps.Geocoder();
+	
+	geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          var cityResults = results[1].formatted_address;
+		  var citySplit = cityResults.split(" " )[0];
+		  var city = citySplit.replace(",", "");
+		  alert(city);
+		  
+		  var lastfm = new LastFM({
+  				apiKey    : 'db2a9b5638ab52fb92255a9e3e9a4c13',
+  				apiSecret : '718ae7b5fe78a60a6bb648977b221411',
+			});
+	
+			lastfm.geo.getEvents({location: city, limit: 5}, {success: function(data){
+				console.log(data);
+				for(var i = 0; i < data.events.event.length; i++) {
+					var venueObject = data.events.event[i].venue.location['geo:point'];
+					var venueLat = venueObject[Object.keys(venueObject)[0]];
+					var venueLong = venueObject[Object.keys(venueObject)[1]];
+					var venuelatLong = new google.maps.LatLng(venueLat, venueLong);
+					
+					var marker = new google.maps.Marker({
+                		map: map,
+                		position: venuelatLong, 
+						animation: google.maps.Animation.DROP
+            });
+				}
+			}, error: function(code, message){
+				console.log("Oh No an Error!");
+			}});
+			
+			lastfm.geo.getEvents({location: city, limit: 5}, {success: function(data){
+				for(var i = 0; i < data.events.event.length; i++) {
+					var imageObject = data.events.event[i].image[1]; //object containg image url and url size
+					var eventImage = imageObject[Object.keys(imageObject)[0]];
+					var infoURL = data.events.event[i].url;
+					console.log(infoURL);
+			
+					document.getElementById("nearYouResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].artists['headliner'] + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
+				}
+			}, error: function(code, message){
+				console.log("Oh No an Error!");
+			}});
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
 }
 
 function worldEvent() {
@@ -465,8 +507,10 @@ function worldEvent() {
 
 
 function successCallback(position) {      
-	alert("hello");
+	var latitude = position.coords.latitude;
+	var longitude =  position.coords.longitude;
 }
+
 function errorCallback(error) { 
 	alert(error.code);
 }           
