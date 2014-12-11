@@ -30,7 +30,7 @@
                     </form>
                     <div id="artistSearchResults">
                         <div id="artistsHeader">
-                            <h3>Artists</h3>
+                            <!--<h3>Artists</h3>-->
                         </div>
                         <div class="card">
                             <ul id="artistResultList" class="table-view">
@@ -38,7 +38,7 @@
                             </ul>
                         </div>
                         <div id="topSongsHeader">
-                            <h3>Top Songs</h3>
+                            <!--<h3>Top Songs</h3>-->
                         </div>
                         <div class="card">
                             <ul id="topSongsList" class="table-view">
@@ -48,7 +48,7 @@
                             </ul>
                         </div>
                         <div id="topAlbumsHeader">
-                            <h3>Top Albums</h3>
+                            <!--<h3>Top Albums</h3>-->
                         </div>
                         <div class="card">
                             <ul id="topAlbumsList" class="table-view">
@@ -58,7 +58,7 @@
                             </ul>
                         </div>
                         <div id="eventsHeader">
-                            <h3>Events</h3>
+                            <!--<h3>Events</h3>-->
                         </div>
                         <div class="card">
                             <ul id="artistResultEventList" class="table-view">
@@ -76,7 +76,7 @@
                     </form>
                     <div id="genreSearchResults">
                         <div id="genreTopArtistsHeader">
-                            <h3>Top Artists(All Time)</h3>
+                            <!--<h3>Top Artists(All Time)</h3>-->
                         </div>
                         <div class="card">
                             <ul id="genreResultList" class="table-view">
@@ -84,7 +84,7 @@
                             </ul>
                         </div>
                         <div id="genreTopSongsHeader">
-                            <h3>Top Songs(All Time)</h3>
+                            <!--<h3>Top Songs(All Time)</h3>-->
                         </div>
                         <div class="card">
                             <ul id="genreTopSongsList" class="table-view">
@@ -94,7 +94,7 @@
                             </ul>
                         </div>
                         <div id="genreTopAlbumsHeader">
-                            <h3>Top Albums(All Time)</h3>
+                            <!--<h3>Top Albums(All Time)</h3>-->
                         </div>
                         <div class="card">
                             <ul id="genreTopAlbumsList" class="table-view">
@@ -126,34 +126,14 @@
                     </form>
                     <div id="relatedArtistSearchResults">
                         <div id="relatedArtistsHeader">
-                            <h3>Related Artists</h3>
+                            <!--<h3>Related Artists</h3>-->
                         </div>
                         <div class="card">
                             <ul id="relatedArtistResultList" class="table-view">
                                 <!--<li class="artistResult table-view-cell">T-Pain</li>-->
                             </ul>
                         </div>
-                        <!--<div id="relatedTopSongsHeader">
-                            <h3>Related Songs</h3>
-                        </div>
-                        <div class="card">
-                            <ul id="relatedTopSongsList" class="table-view">
-                                <li class="topSong table-view-cell">Buy U A Drink</li>
-                                <li class="topSong table-view-cell">Something else</li>
-                                <li class="topSong table-view-cell">Something else</li>
-                            </ul>
-                        </div>
-                        <div id="relatedTopAlbumsHeader">
-                            <h3>Related Albums</h3>
-                        </div>
-                        <div class="card">
-                            <ul id="relatedTopAlbumsList" class="table-view">
-                                <li class="topAlbum table-view-cell">Rappa Ternt Sanga</li>
-                                <li class="topAlbum table-view-cell">Something else</li>
-                                <li class="topAlbum table-view-cell">Something else</li>
-                            </ul>
-                        </div>-->
-                    </div>
+                     </div>
                 </div>
                 <div id="relatedSongs" class="hide">
                     <form>
@@ -162,7 +142,7 @@
                     </form>
                     <div id="relatedSongsSearchResults">
                         <div id="relatedSearchedSongHeader">
-                            <h3>Song</h3>
+                            <!--<h3>Song</h3>-->
                         </div>
                         <div class="card">
                             <ul id="searchedSongResultList" class="table-view">
@@ -170,7 +150,7 @@
                             </ul>
                         </div>
                         <div id="relatedSearchedTopSongsHeader">
-                            <h3>Related Songs</h3>
+                            <!--<h3>Related Songs</h3>-->
                         </div>
                         <div class="card">
                             <ul id="relatedSearchedTopSongsList" class="table-view">
@@ -196,18 +176,20 @@
             
             <div id="eventsMainBody">
                 <div id="nearYou" class="show">
-                    <form>
-                        <input type="search" placeholder="Search Artist"/>
-                        <button class="btn btn-primary btn-block" type="button" id="nearYouButton">Search</button>
-                    </form>
+                	<div id="eventsNearYouHeader">
+                    	<h3>Events</h3>
+                    </div>
                     <div id="eventsNearYouResults">
-                        <div id="eventsNearYouHeader">
-                            <h3>Events</h3>
+                    	<div id="googleMap" class="card" style="width:95%;height:200px;"></div>
+                    	<div class="card">
+                        	<ul id="nearYouResultList" class="table-view">
+                                <!--<li class="artistResult table-view-cell">Something here</li>
+                                <li class="artistResult table-view-cell">Something here</li>-->
+                            </ul>
                         </div>
-                        <div id="googleMap" class="card" style="width:95%;height:200px;"></div>
-                        </div>
-                  	</div>
+                    </div>    
                 </div>
+            </div>
                 
                 <div id="worldwide" class="hide">
                     <form>
