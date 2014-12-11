@@ -22,4 +22,5 @@
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/ant-build/classes/org/apache/cordova/inappbrowser/InAppChromeClient.class \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/ant-build/classes/org/apache/cordova/networkinformation/NetworkManager$1.class \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/ant-build/classes/org/apache/cordova/networkinformation/NetworkManager.class \
+/Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/ant-build/classes/org/apache/cordova/splashscreen/SplashScreen.class \
 /Users/HeyImNathan/documents/school/mad9135/html5-musicApp-master/platforms/android/ant-build/dexedLibs/classes-6033328e1aaf1bf2dfe593ada41412ae.jar \
