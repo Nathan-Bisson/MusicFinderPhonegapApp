@@ -561,11 +561,12 @@ function worldEvent() {
 
 
 function localEvents(position) {      
-	//var latitude = position.coords.latitude;
-	//var longitude =  position.coords.longitude;
+	var latitude = position.coords.latitude;
+	var longitude =  position.coords.longitude;
 	
-	var latitude = 45.4214;
-	var longitude = -75.6919;
+	//Spoof Ottawa city centre
+	//var latitude = 45.4214;
+	//var longitude = -75.6919;
 
 	var mapProp = {
     	center:new google.maps.LatLng(latitude,longitude),
