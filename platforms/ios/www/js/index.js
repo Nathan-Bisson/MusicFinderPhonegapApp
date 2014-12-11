@@ -119,6 +119,8 @@ document.getElementById("discArtist").addEventListener("click", function() {
 	if(networkState === Connection.NONE) {
 		alert("Oh no! You don't have a data connection!");
 	} else {
+		discoverArtist();
+		
 		document.getElementById("artistsHeader").innerHTML = "";
 		document.getElementById("topSongsHeader").innerHTML = "";
 		document.getElementById("topAlbumsHeader").innerHTML = "";
@@ -128,8 +130,6 @@ document.getElementById("discArtist").addEventListener("click", function() {
 		document.getElementById("topSongsHeader").innerHTML += '<h3>Top Songs</h3>';
 		document.getElementById("topAlbumsHeader").innerHTML += '<h3>Top Albums</h3>';
 		document.getElementById("eventsHeader").innerHTML += '<h3>Upcoming Events</h3>';
-		
-		discoverArtist();
 	}
 });
 
@@ -139,6 +139,8 @@ document.getElementById("discGenre").addEventListener("click", function() {
 	if(networkState === Connection.NONE) {
 		alert("Oh no! You don't have a data connection!");
 	} else {
+		discoverGenre();
+		
 		document.getElementById("genreTopArtistsHeader").innerHTML = "";
 		document.getElementById("genreTopSongsHeader").innerHTML = "";
 		document.getElementById("genreTopAlbumsHeader").innerHTML = "";
@@ -146,8 +148,6 @@ document.getElementById("discGenre").addEventListener("click", function() {
 		document.getElementById("genreTopArtistsHeader").innerHTML += '<h3>Top Artists(All Time)</h3>';
 		document.getElementById("genreTopSongsHeader").innerHTML += '<h3>Top Songs(All TIme)</h3>';
 		document.getElementById("genreTopAlbumsHeader").innerHTML += '<h3>Top Albums(All Time)</h3>';
-		
-		discoverGenre();
 	}
 });
 
@@ -157,11 +157,11 @@ document.getElementById("relatedAritistSearch").addEventListener("click", functi
 	if(networkState === Connection.NONE) {
 		alert("Oh no! You don't have a data connection!");
 	} else {
+		relatedArtists();
+		
 		document.getElementById("relatedArtistsHeader").innerHTML = "";
 		
 		document.getElementById("relatedArtistsHeader").innerHTML += '<h3>Related Artists</h3>';
-		
-		relatedArtists();
 	}
 });
 
@@ -171,13 +171,13 @@ document.getElementById("relatedSongSearchButton").addEventListener("click", fun
 	if(networkState === Connection.NONE) {
 		alert("Oh no! You don't have a data connection!");
 	} else {
+		relatedSongs();
+		
 		document.getElementById("relatedSearchedSongHeader").innerHTML = "";
 		document.getElementById("relatedSearchedTopSongsHeader").innerHTML = "";
 		
 		document.getElementById("relatedSearchedSongHeader").innerHTML += '<h3>Song</h3>';
 		document.getElementById("relatedSearchedTopSongsHeader").innerHTML += '<h3>Related Songs</h3>';
-		
-		relatedSongs();
 	}
 });
 
@@ -221,7 +221,7 @@ $("#nearYouResultList").on('click', 'li', function() { //in-app browser for worl
 	var webBrowser = window.open(encodeURI(eventURL), '_blank');
 });
 
-$("#topSongsList").on('click', 'li', function() { //in-app browser for world event page
+$("#topSongsList").on('click', 'li', function() { //click song to get related from artist
 	var songName = this.id;
 	$('#relatedSongSearch').val(songName);
 	$("#relatedSongSearchButton").click();
@@ -243,8 +243,80 @@ $("#topSongsList").on('click', 'li', function() { //in-app browser for world eve
 	$( "#relatedArtists" ).addClass( "hide" );
 	$( "#relatedSongs" ).removeClass( "hide" );  
 	$( "#relatedSongs" ).addClass( "show" );
-	
 });
+
+$("#artistResultList").on('click', 'li', function() { //click artist to get related from artist
+	var artistName = this.id;
+	$('#searchRelatedArtist').val(artistName);
+	$("#relatedAritistSearch").click();
+	
+	$( "#discoveryTab" ).removeClass( "active" );
+	$( "#relatedTab" ).addClass( "active" );
+	$( "#eventsTab" ).removeClass( "active" );
+	
+	$( "#discovery" ).removeClass( "show" );
+	$( "#discovery" ).addClass( "hide" );
+	$( "#related" ).removeClass( "hide" );
+	$( "#related" ).addClass( "show" );
+	$( "#events" ).removeClass( "show" );
+	$( "#events" ).addClass( "hide" );
+	
+	$( "#relatedSongTab" ).removeClass("active");
+	$( "#relatedArtistTab" ).addClass("active");
+	$( "#relatedArtists" ).addClass( "show" );  
+	$( "#relatedArtists" ).removeClass( "hide" );
+	$( "#relatedSongs" ).addClass( "hide" );  
+	$( "#relatedSongs" ).removeClass( "show" );
+});
+
+$("#genreResultList").on('click', 'li', function() { //click artist to get related from genre 
+	var artistName = this.id;
+	$('#searchRelatedArtist').val(artistName);
+	$("#relatedAritistSearch").click();
+	
+	$( "#discoveryTab" ).removeClass( "active" );
+	$( "#relatedTab" ).addClass( "active" );
+	$( "#eventsTab" ).removeClass( "active" );
+	
+	$( "#discovery" ).removeClass( "show" );
+	$( "#discovery" ).addClass( "hide" );
+	$( "#related" ).removeClass( "hide" );
+	$( "#related" ).addClass( "show" );
+	$( "#events" ).removeClass( "show" );
+	$( "#events" ).addClass( "hide" );
+	
+	$( "#relatedSongTab" ).removeClass("active");
+	$( "#relatedArtistTab" ).addClass("active");
+	$( "#relatedArtists" ).addClass( "show" );  
+	$( "#relatedArtists" ).removeClass( "hide" );
+	$( "#relatedSongs" ).addClass( "hide" );  
+	$( "#relatedSongs" ).removeClass( "show" );
+});
+
+$("#genreTopSongsList").on('click', 'li', function() { //click song to get related from artist
+	var songName = this.id;
+	$('#relatedSongSearch').val(songName);
+	$("#relatedSongSearchButton").click();
+	
+	$( "#discoveryTab" ).removeClass( "active" );
+	$( "#relatedTab" ).addClass( "active" );
+	$( "#eventsTab" ).removeClass( "active" );
+	
+	$( "#discovery" ).removeClass( "show" );
+	$( "#discovery" ).addClass( "hide" );
+	$( "#related" ).removeClass( "hide" );
+	$( "#related" ).addClass( "show" );
+	$( "#events" ).removeClass( "show" );
+	$( "#events" ).addClass( "hide" );
+	
+	$( "#relatedSongTab" ).addClass("active");
+	$( "#relatedArtistTab" ).removeClass("active");
+	$( "#relatedArtists" ).removeClass( "show" );  
+	$( "#relatedArtists" ).addClass( "hide" );
+	$( "#relatedSongs" ).removeClass( "hide" );  
+	$( "#relatedSongs" ).addClass( "show" );
+});
+
 
 function discoverArtist() {
 	var searchedArtist = document.getElementById("searchArtist").value;
@@ -264,7 +336,7 @@ function discoverArtist() {
 		var artistImageObject = data.results.artistmatches.artist[0].image[1]; 
 		var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
 			
-		document.getElementById("artistResultList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + data.results.artistmatches.artist[0].name + '</div></li>'
+		document.getElementById("artistResultList").innerHTML += ' <li id="' + data.results.artistmatches.artist[0].name + '"class="table-view-cell media"><a class="navigate-right"> <img class="media-object pull-left" src="' + artistImage + '">' + data.results.artistmatches.artist[0].name + '</a></li>'
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
 	}});
@@ -326,9 +398,7 @@ function discoverGenre() {
 			var artistImageObject = data.topartists.artist[i].image[1] //data.results.artistmatches.artist[i].image[0]; 
 			var artistImage = artistImageObject[Object.keys(artistImageObject)[0]];
 			
-			document.getElementById("genreResultList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + data.topartists.artist[i].name + '</div></li>'
-			
-			//document.getElementById("genreResultList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + data.topartists.artist[i].name + '</li>'
+			document.getElementById("genreResultList").innerHTML += ' <li id="' + data.topartists.artist[i].name + '"class="table-view-cell media"><a class="navigate-right"> <img class="media-object pull-left" src="' + artistImage + '">' + data.topartists.artist[i].name + '</a></li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
@@ -340,7 +410,7 @@ function discoverGenre() {
 			var trackName = data.toptracks.track[i].name;
 			var artistName = data.toptracks.track[i].artist.name;
 			
-			document.getElementById("genreTopSongsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + trackName + ' - ' + artistName + '</li>'
+			document.getElementById("genreTopSongsList").innerHTML += '<li id="' + trackName + '"class="genreArtistsResult table-view-cell"><a class="navigate-right">' + trackName + ' - ' + artistName + '</a></li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
@@ -356,7 +426,6 @@ function discoverGenre() {
 			
 			document.getElementById("genreTopAlbumsList").innerHTML += ' <li class="table-view-cell media"> <img class="media-object pull-left" src="' + artistImage + '">' + albumName + ' - ' + artistName + '</div></li>'
 			
-			//document.getElementById("genreTopAlbumsList").innerHTML += '<li class="genreArtistsResult table-view-cell">' + albumName + ' - ' + artistName + '</li>'
 		}
 	}, error: function(code, message){
   		console.log("Oh No an Error!");
@@ -483,7 +552,7 @@ function worldEvent() {
 			var infoURL = data.events.event[i].url;
 			console.log(infoURL);
 			
-			document.getElementById("eventsWorldwideResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].artists['headliner'] + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
+			document.getElementById("eventsWorldwideResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].artists['headliner'] + '<p>Venue: ' + data.events.event[i].venue.name + '</p> <p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
 		}
 	}, error: function(code, message){
 		console.log("Oh No an Error!");
@@ -492,11 +561,11 @@ function worldEvent() {
 
 
 function localEvents(position) {      
-	var latitude = position.coords.latitude;
-	var longitude =  position.coords.longitude;
+	//var latitude = position.coords.latitude;
+	//var longitude =  position.coords.longitude;
 	
-	//var latitude = 45.4214;
-	//var longitude = -75.6919;
+	var latitude = 45.4214;
+	var longitude = -75.6919;
 
 	var mapProp = {
     	center:new google.maps.LatLng(latitude,longitude),
@@ -544,7 +613,7 @@ function localEvents(position) {
 					var infoURL = data.events.event[i].url;
 					console.log(infoURL);
 			
-					document.getElementById("nearYouResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].artists['headliner'] + '<p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
+					document.getElementById("nearYouResultList").innerHTML += '<li id="' + infoURL + '" class="table-view-cell media"> <a class="navigate-right"> <img class="media-object pull-left" src="' + eventImage + '"> <div class="media-body">' + data.events.event[i].artists['headliner'] + '<p>Venue: ' + data.events.event[i].venue.name + '</p> <p>Date: ' + data.events.event[i].startDate + '</p> </div> </a>'
 				}
 			}, error: function(code, message){
 				console.log("Oh No an Error!");
